@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer SR;
     Animator animator;
+    bool Facingleft;
 
     void Start()
     {
@@ -20,18 +21,29 @@ public class PlayerMovement : MonoBehaviour
     public void OnActionMovement(InputAction.CallbackContext context)
     {
         Movement = context.ReadValue<Vector2>();
+
+        if (Movement.x < 0)
+        {
+          Facingleft = true;
+        }
+
+        if (Movement.x > 0)
+        {
+            Facingleft = false;
+        }
+
         Debug.Log("Movement: " + Movement);
     }
 
     void FixedUpdate()
     {
-        if (Movement.x < 0 || playerLane.OnTop)
+        if (!playerLane.OnTop)
         {
-            SR.flipX = true;
+            SR.flipX = Facingleft;
         }
-        if (Movement.x > 0 || playerLane.OnTop)
+        else
         {
-            SR.flipX = false;
+            SR.flipX = !Facingleft;
         }
 
         if (Movement != Vector2.zero)

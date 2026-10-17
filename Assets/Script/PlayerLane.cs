@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class PlayerLane : MonoBehaviour
 {
     [SerializeField] float bottomY = -1.72f;
     [SerializeField] float topY = 0.18f;
     [SerializeField] float topDuration = 4f;
     [SerializeField] float cooldown = 0.5f;
-
     Rigidbody2D rb;
     SpriteRenderer sr;
     bool onTop;
@@ -59,7 +57,6 @@ public class PlayerLane : MonoBehaviour
         cooldownTimer = cooldown;
         SnapTo(bottomY, 0f);
     }
-
     void SnapTo(float y, float angle)
     {
         rb.position = new Vector2(rb.position.x, y);
