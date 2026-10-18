@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     PlayerLane playerLane;
     Vector2 Movement;
     Rigidbody2D rb;
-    SpriteRenderer SR;
     Animator animator;
     bool Facingleft;
 
@@ -15,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
         playerLane = GetComponent<PlayerLane>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        SR = GetComponent<SpriteRenderer>();
     }
 
     public void OnActionMovement(InputAction.CallbackContext context)
@@ -37,15 +35,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!playerLane.OnTop)
-        {
-            SR.flipX = Facingleft;
-        }
-        else
-        {
-            SR.flipX = !Facingleft;
-        }
-
+        float zAngle = playerLane.OnTop ? 180f : 0f;
+        float yAngle = (Facingleft != playerLane.OnTop) ? 180f : 0f;
+        transform.rotation = Quaternion.Euler(0f, yAngle, zAngle);
         if (Movement != Vector2.zero)
         {
             animator.SetBool("Run", true);

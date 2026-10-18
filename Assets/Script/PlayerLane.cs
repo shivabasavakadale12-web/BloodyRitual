@@ -8,7 +8,6 @@ public class PlayerLane : MonoBehaviour
     [SerializeField] float topDuration = 4f;
     [SerializeField] float cooldown = 0.5f;
     Rigidbody2D rb;
-    SpriteRenderer sr;
     bool onTop;
     float topTimer;
     float cooldownTimer;
@@ -18,7 +17,6 @@ public class PlayerLane : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -61,7 +59,6 @@ public class PlayerLane : MonoBehaviour
     void SnapTo(float y, float angle)
     {
         rb.position = new Vector2(rb.position.x, y);
-        rb.rotation = angle;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
     }
 }
