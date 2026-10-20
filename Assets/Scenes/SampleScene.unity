@@ -301,7 +301,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 2
 --- !u!114 &74972395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAi
   Enemydata: {fileID: 11400000, guid: 60fdf8b6cc3f99244999356e5e617fbd, type: 2}
+  Sister: {fileID: 539180508}
+  hitBox: {fileID: 1008008839}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

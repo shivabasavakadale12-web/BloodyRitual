@@ -3,47 +3,78 @@ using UnityEngine;
 public class EnemyAi : MonoBehaviour
 {
     [SerializeField] Enemydata Enemydata;
+    [SerializeField] GameObject Sister;
+    [SerializeField] BoxCollider2D hitBox; 
+
     Transform player;
+    PlayerLane playerLane;
     Rigidbody2D Rb;
     Animator Animator;
-    BoxCollider2D hitBox;
+
+    bool isAttacking;
+    float coolDown;
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        GameObject p = GameObject.FindWithTag("Player");
+        player = p.transform;
+        playerLane = p.GetComponent<PlayerLane>();
         Rb = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
-        hitBox = GetComponentInChildren<BoxCollider2D>();
+        hitBox.enabled = false;
     }
 
     void Update()
     {
-        if (Enemydata.isAttacking) return;
+        if (isAttacking) { Stop(); return; }
 
-       Vector2 distance = player.position - transform.position;
-        if (distance.magnitude < Enemydata.attackRange)
+        coolDown += Time.deltaTime;
+
+        float moveDir = Mathf.Sign(Sister.transform.position.x - transform.position.x);
+
+        if (PlayerBlocking(moveDir))
         {
-            Enemydata.isAttacking = true;
-            Animator.SetTrigger("Attack");
-        }  
-        
-        else
-        {
-            Rb.linearVelocity = distance.normalized * Enemydata.speed;
-            Rb.MovePosition(Rb.position + distance.normalized * Enemydata.speed * Time.fixedDeltaTime);
-            Animator.SetBool("Run", true);
+            Stop();
+            if (coolDown >= Enemydata.attackFrequency) StartAttack();
+            return;
         }
+
+        Chase(moveDir);
     }
 
-    void AttackHitBox()
+    bool PlayerBlocking(float moveDir)
     {
-        hitBox.enabled = true;
+        if (playerLane.OnTop) return false;            
+        float dx = player.position.x - transform.position.x;
+        bool ahead = Mathf.Sign(dx) == moveDir;          
+        return ahead && Mathf.Abs(dx) <= Enemydata.attackRange;
     }
+
+    void Chase(float moveDir)
+    {
+        Rb.linearVelocity = new Vector2(moveDir * Enemydata.speed, 0f);
+        Animator.SetBool("Run", true);
+        transform.rotation = Quaternion.Euler(0f, moveDir > 0 ? 0f : 180f, 0f);
+    }
+
+    void Stop()
+    {
+        Rb.linearVelocity = Vector2.zero;
+        Animator.SetBool("Run", false);
+    }
+
+    void StartAttack()
+    {
+        isAttacking = true;
+        coolDown = 0f;
+        Animator.SetTrigger("Attack");
+    }
+
+    void AttackHitBox() { hitBox.enabled = true; }
 
     void AttackHitBoxEnd()
     {
-        Debug.Log("AttackHitBoxEnd");
-        Enemydata.isAttacking = false;
+        isAttacking = false;
         hitBox.enabled = false;
     }
 }

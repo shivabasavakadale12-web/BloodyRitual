@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e46ae2d503ea34882d3ccee2dffe92, type: 3}
   m_Name: EnemyData1
   m_EditorClassIdentifier: Assembly-CSharp::Enemydata
-  speed: 5
+  speed: 1.43
   attackRange: 2.4
   attackFrequency: 2.18
-  isAttacking: 1
   Sister: {fileID: 0}
