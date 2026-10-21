@@ -3,9 +3,9 @@ using UnityEngine;
 public class EnemyAi : MonoBehaviour
 {
     [SerializeField] Enemydata Enemydata;
-    [SerializeField] GameObject Sister;
     [SerializeField] BoxCollider2D hitBox; 
 
+     GameObject Sister;
     Transform player;
     PlayerLane playerLane;
     Rigidbody2D Rb;
@@ -16,6 +16,7 @@ public class EnemyAi : MonoBehaviour
 
     void Start()
     {
+        Sister = GameObject.FindWithTag("Sister");
         GameObject p = GameObject.FindWithTag("Player");
         player = p.transform;
         playerLane = p.GetComponent<PlayerLane>();
@@ -28,9 +29,12 @@ public class EnemyAi : MonoBehaviour
     {
         if (isAttacking) { Stop(); return; }
 
+
         coolDown += Time.deltaTime;
 
         float moveDir = Mathf.Sign(Sister.transform.position.x - transform.position.x);
+
+        if(player == null) { Chase(moveDir); return; }
 
         if (PlayerBlocking(moveDir))
         {
