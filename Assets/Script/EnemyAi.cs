@@ -17,9 +17,13 @@ public class EnemyAi : MonoBehaviour
     void Start()
     {
         Sister = GameObject.FindWithTag("Sister");
-        GameObject p = GameObject.FindWithTag("Player");
-        player = p.transform;
-        playerLane = p.GetComponent<PlayerLane>();
+
+        if(player != null)
+        {
+         GameObject p = GameObject.FindWithTag("Player");
+         player = p.transform;
+         playerLane = p.GetComponent<PlayerLane>();
+        }
         Rb = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         hitBox.enabled = false;
