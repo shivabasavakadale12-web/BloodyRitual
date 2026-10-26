@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class Spawners : MonoBehaviour
 {
-    [SerializeField] Transform[] spawnPoints;  
-    [SerializeField] GameObject[] enemies;     
-    [SerializeField] float startInterval = 5f;
-    [SerializeField] float minInterval = 1.5f;
-    [SerializeField] float speedUp = 0.1f;    
-    [SerializeField] int maxAlive = 6;
+    [SerializeField] Transform[] spawnPoints;
+    [SerializeField] GameObject[] enemies;
+    [SerializeField] float startInterval = 5.5f;
+    [SerializeField] float minInterval = 3f;
+    [SerializeField] float shrinkPerSecond = 0.025f; 
+    [SerializeField] int maxAlive = 4;
 
     readonly List<GameObject> spawned = new List<GameObject>();
     float interval;
@@ -18,27 +18,26 @@ public class Spawners : MonoBehaviour
     {
         if (spawnPoints.Length == 0 || enemies.Length == 0)
         {
-            Debug.LogWarning("Spawners: assign spawn points and enemy prefabs");
             enabled = false;
             return;
         }
         interval = startInterval;
-        timer = startInterval;
+        timer = 0f; 
     }
 
     void Update()
     {
         if (GameState.Over) return;
 
+        interval = Mathf.Max(minInterval, interval - shrinkPerSecond * Time.deltaTime);
+
         timer += Time.deltaTime;
         if (timer < interval) return;
+
+        spawned.RemoveAll(e => e == null);
+        if (spawned.Count >= maxAlive) return; 
         timer = 0f;
-
-        spawned.RemoveAll(e => e == null); 
-        if (spawned.Count >= maxAlive) return;
-
         Spawn();
-        interval = Mathf.Max(minInterval, interval - speedUp);
     }
 
     void Spawn()

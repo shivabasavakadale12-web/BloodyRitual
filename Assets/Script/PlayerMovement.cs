@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     bool Facingleft;
+    float timer = 0f;
 
     void Start()
     {
@@ -35,6 +36,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        timer += Time.fixedDeltaTime;
+
+        if (timer >= 30f)
+        {
+            speed += 0.3f;
+        }
+
         float zAngle = playerLane.OnTop ? 180f : 0f;
         float yAngle = (Facingleft != playerLane.OnTop) ? 180f : 0f;
         transform.rotation = Quaternion.Euler(0f, yAngle, zAngle);

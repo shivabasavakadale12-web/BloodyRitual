@@ -3,24 +3,25 @@ using UnityEngine;
 public class EnemyAi : MonoBehaviour
 {
     [SerializeField] Enemydata Enemydata;
-    [SerializeField] BoxCollider2D hitBox; 
-
-     GameObject Sister;
+    [SerializeField] BoxCollider2D hitBox;
+    Combat playerAttack;
+    GameObject Sister;
     Transform player;
     PlayerLane playerLane;
     Rigidbody2D Rb;
     Animator Animator;
-
+    GameObject p;
     bool isAttacking;
+    public bool IsAttacking => isAttacking;
     float coolDown;
 
     void Start()
     {
         Sister = GameObject.FindWithTag("Sister");
-
-        if(player != null)
+        p = GameObject.FindWithTag("Player");
+        playerAttack = FindAnyObjectByType<Combat>();
+        if(p != null)
         {
-         GameObject p = GameObject.FindWithTag("Player");
          player = p.transform;
          playerLane = p.GetComponent<PlayerLane>();
         }
@@ -31,8 +32,7 @@ public class EnemyAi : MonoBehaviour
 
     void Update()
     {
-        if (isAttacking) { Stop(); return; }
-
+        if (isAttacking ) { Stop(); return; }
 
         coolDown += Time.deltaTime;
 
@@ -73,6 +73,7 @@ public class EnemyAi : MonoBehaviour
 
     void StartAttack()
     {
+        if (playerAttack.isAttacking) return;
         isAttacking = true;
         coolDown = 0f;
         Animator.SetTrigger("Attack");
