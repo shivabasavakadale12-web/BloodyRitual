@@ -20,7 +20,7 @@ public class Combat : MonoBehaviour
 
     public void OnActionAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && !Attacking && !enemyAttack.IsAttacking)
+        if (context.performed && !Attacking )
         {
             Debug.Log("Attack");
             Attack();
@@ -29,8 +29,8 @@ public class Combat : MonoBehaviour
 
     void Attack()
     {
-        Attacking = true;
-        animator.SetTrigger("Attack");
+         Attacking = true;
+         animator.SetTrigger("Attack");
     }
 
     void EnableHitBox()
