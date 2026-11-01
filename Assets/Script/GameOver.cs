@@ -10,6 +10,7 @@ public class GameOer : MonoBehaviour
     [SerializeField] float rotateSpeed = 50f;
     float minSize = 3;
     float maxSize = 7;
+    bool gameover = false;
 
     private void Start()
     {
@@ -17,13 +18,20 @@ public class GameOer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Camera.transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
-        Camera.orthographicSize -= ZoomSpeed * Time.deltaTime;
-        Camera.orthographicSize = Mathf.Clamp(Camera.orthographicSize, minSize, maxSize);
-
+        gameover = true;
         Debug.Log("game over");
         Time.timeScale = 0.35f;
         StartCoroutine(LoadSceneRoutine());
+    }
+
+    void Update()
+    {
+        if (gameover)
+        {
+            Camera.orthographicSize += ZoomSpeed * Time.unscaledDeltaTime;
+            Camera.transform.Rotate(Vector3.forward, rotateSpeed * Time.unscaledDeltaTime);
+            Camera.orthographicSize = Mathf.Clamp(Camera.orthographicSize, minSize, maxSize);
+        }
     }
     IEnumerator LoadSceneRoutine()
     {
@@ -33,6 +41,7 @@ public class GameOer : MonoBehaviour
 
     public void Restart()
     {
+        gameover = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

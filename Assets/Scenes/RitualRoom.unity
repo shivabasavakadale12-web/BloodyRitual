@@ -2706,8 +2706,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameOer
   LostMenu: {fileID: 1370868219}
   Camera: {fileID: 519420031}
-  ZoomSpeed: 100
-  rotateSpeed: 100
+  ZoomSpeed: -0.5
+  rotateSpeed: 2.5
 --- !u!1001 &9210350419756071874
 PrefabInstance:
   m_ObjectHideFlags: 0
