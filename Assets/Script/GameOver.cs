@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOer : MonoBehaviour
 {
+    [SerializeField] GameObject LostText;
     [SerializeField] GameObject LostMenu;
     [SerializeField] Camera Camera;
     [SerializeField] float ZoomSpeed = 50f;
@@ -35,8 +36,13 @@ public class GameOer : MonoBehaviour
     }
     IEnumerator LoadSceneRoutine()
     {
+        
         yield return new WaitForSecondsRealtime(2f);
+        LostText.SetActive(true);
+        yield return new WaitForSecondsRealtime(1.6f);
         LostMenu.SetActive(true);
+        Time.timeScale = 0f;
+        gameover = false;
     }
 
     public void Restart()
