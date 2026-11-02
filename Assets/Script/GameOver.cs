@@ -7,6 +7,7 @@ public class GameOer : MonoBehaviour
     [SerializeField] GameObject LostText;
     [SerializeField] GameObject LostMenu;
     [SerializeField] Camera Camera;
+    [SerializeField] GrayscaleEffect effect;
     [SerializeField] float ZoomSpeed = 50f;
     [SerializeField] float rotateSpeed = 50f;
     float minSize = 3;
@@ -36,7 +37,7 @@ public class GameOer : MonoBehaviour
     }
     IEnumerator LoadSceneRoutine()
     {
-        
+        effect.EnableGrayscale();
         yield return new WaitForSecondsRealtime(2f);
         LostText.SetActive(true);
         yield return new WaitForSecondsRealtime(1.6f);

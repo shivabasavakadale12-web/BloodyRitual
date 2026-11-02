@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     bool Facingleft;
-    float timer = 0f;
+
 
     void Start()
     {
@@ -31,21 +31,20 @@ public class PlayerMovement : MonoBehaviour
             Facingleft = false;
         }
 
-        Debug.Log("Movement: " + Movement);
     }
 
     void FixedUpdate()
     {
-        timer += Time.fixedDeltaTime;
+        speed += 0.0005f;
 
-        if (timer >= 30f)
+        if(speed >= 16f)
         {
-            speed += 0.3f;
-        }
-
+            speed = 16f;
+        }    
         float zAngle = playerLane.OnTop ? 180f : 0f;
         float yAngle = (Facingleft != playerLane.OnTop) ? 180f : 0f;
         transform.rotation = Quaternion.Euler(0f, yAngle, zAngle);
+
         if (Movement != Vector2.zero)
         {
             animator.SetBool("Run", true);
@@ -54,9 +53,10 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Run", false);
         }
+
         Vector2 currentposition = rb.position;
-       Vector2 MoveTowards = currentposition + Movement * speed * Time.fixedDeltaTime;
-       rb.MovePosition(MoveTowards);
+        Vector2 MoveTowards = currentposition + Movement * speed * Time.fixedDeltaTime;
+        rb.MovePosition(MoveTowards);
     }
 
 

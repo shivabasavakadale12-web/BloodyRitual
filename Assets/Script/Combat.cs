@@ -8,6 +8,7 @@ public class Combat : MonoBehaviour
     public bool isAttacking => Attacking;
     Animator animator;
     BoxCollider2D HitBox;
+    [SerializeField] AudioSource swordSwing;
 
     void Start()
     {
@@ -31,6 +32,8 @@ public class Combat : MonoBehaviour
     {
          Attacking = true;
          animator.SetTrigger("Attack");
+         Vector3 cameraPos = Camera.main.transform.position;
+         AudioSource.PlayClipAtPoint(swordSwing.clip, cameraPos);
     }
 
     void EnableHitBox()

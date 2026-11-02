@@ -7,7 +7,7 @@ public class Spawners : MonoBehaviour
     [SerializeField] GameObject[] enemies;
     [SerializeField] float startInterval = 5.5f;
     [SerializeField] float minInterval = 3f;
-    [SerializeField] float shrinkPerSecond = 0.025f; 
+    [SerializeField] float shrinkPerSecond = 0.075f; 
     [SerializeField] int maxAlive = 4;
 
     readonly List<GameObject> spawned = new List<GameObject>();
