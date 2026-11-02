@@ -1,13 +1,18 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameOer : MonoBehaviour
 {
     [SerializeField] GameObject LostText;
     [SerializeField] GameObject LostMenu;
     [SerializeField] Camera Camera;
+    [SerializeField] DestroyObjects sister;
+    [SerializeField] DestroyObjects player;
     [SerializeField] GrayscaleEffect effect;
+    [SerializeField]
+    GameObject FireEffect;
     [SerializeField] float ZoomSpeed = 50f;
     [SerializeField] float rotateSpeed = 50f;
     float minSize = 3;
@@ -23,7 +28,7 @@ public class GameOer : MonoBehaviour
         gameover = true;
         Debug.Log("game over");
         Time.timeScale = 0.35f;
-        StartCoroutine(LoadSceneRoutine());
+        StartCoroutine(LoadSceneRoutine(collision));
     }
 
     void Update()
@@ -35,9 +40,17 @@ public class GameOer : MonoBehaviour
             Camera.orthographicSize = Mathf.Clamp(Camera.orthographicSize, minSize, maxSize);
         }
     }
-    IEnumerator LoadSceneRoutine()
+    IEnumerator LoadSceneRoutine(Collider2D collision)
+
     {
         effect.EnableGrayscale();
+        yield return new WaitForSecondsRealtime(1);
+        if (collision != null)
+        {
+            sister.OnDestroy();
+            FireEffect.SetActive(true);
+            player.OnDestroy();
+        }
         yield return new WaitForSecondsRealtime(2f);
         LostText.SetActive(true);
         yield return new WaitForSecondsRealtime(1.6f);

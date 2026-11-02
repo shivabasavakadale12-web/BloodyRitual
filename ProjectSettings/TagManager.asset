@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Sister
   - EnemyHitBox
+  - FxTemporaire
+  - FireEffect
   layers:
   - Default
   - TransparentFX
