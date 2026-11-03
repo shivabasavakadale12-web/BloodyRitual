@@ -49,7 +49,8 @@ public class GameOer : MonoBehaviour
         {
             sister.OnDestroy();
             FireEffect.SetActive(true);
-            player.OnDestroy();
+            if (player != null)
+                player.OnDestroy();
         }
         yield return new WaitForSecondsRealtime(2f);
         LostText.SetActive(true);

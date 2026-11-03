@@ -33,7 +33,7 @@ public class EnemyAi : MonoBehaviour
     void Update()
     {
         if (isAttacking ) { Stop(); return; }
-
+        if(Sister == null) { Stop(); return; }
         coolDown += Time.deltaTime;
 
         float moveDir = Mathf.Sign(Sister.transform.position.x - transform.position.x);

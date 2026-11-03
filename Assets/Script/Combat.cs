@@ -9,6 +9,8 @@ public class Combat : MonoBehaviour
     Animator animator;
     BoxCollider2D HitBox;
     [SerializeField] AudioSource swordSwing;
+    [SerializeField] GameObject effect;
+    bool isEffectActive = false;
 
     void Start()
     {
@@ -23,11 +25,24 @@ public class Combat : MonoBehaviour
     {
         if (context.performed && !Attacking )
         {
-            Debug.Log("Attack");
+          
             Attack();
         }
     }
 
+    public void OnActionAttack2(InputAction.CallbackContext context)
+    {
+        if (context.performed && !Attacking && !isEffectActive)
+        {
+            isEffectActive = true;
+            Instantiate(effect, transform.position,transform.rotation * Quaternion.Euler(0,180,0) * Quaternion.Euler(90, 0, 0));
+            Attacking = true;
+            animator.SetTrigger("Attack2");
+            Vector3 cameraPos = Camera.main.transform.position;
+            AudioSource.PlayClipAtPoint(swordSwing.clip, cameraPos);
+
+        }
+    }
     void Attack()
     {
          Attacking = true;
@@ -43,6 +58,7 @@ public class Combat : MonoBehaviour
 
     void DisableHitBox()
     {
+        isEffectActive = false;
         HitBox.enabled = false;
         Attacking = false;
     }

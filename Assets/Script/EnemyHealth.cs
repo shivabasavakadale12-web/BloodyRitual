@@ -4,7 +4,7 @@ public class EnemyHealth : MonoBehaviour
 {
     EnemyAi enemyAi;
     Animator animator;
-
+   [SerializeField] AudioSource audioSource;
     private void Start()
     {
         enemyAi = GetComponent<EnemyAi>();
@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerHitBox"))
         {
+            audioSource.Play();
             enemyAi.enabled = false;
             Time.timeScale = 0.5f;
             animator.SetTrigger("Die");
