@@ -5,7 +5,7 @@ public class PlayerLane : MonoBehaviour
 {
     [SerializeField] float bottomY = -1.72f;
     [SerializeField] float topY = 0.18f;
-    [SerializeField] float topDuration = 4f;
+    [SerializeField] float topDuration = 2.8f;
     [SerializeField] float cooldown = 0.5f;
     Rigidbody2D rb;
     bool onTop;

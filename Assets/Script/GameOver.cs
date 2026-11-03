@@ -13,6 +13,7 @@ public class GameOer : MonoBehaviour
     [SerializeField] GrayscaleEffect effect;
     [SerializeField]
     GameObject FireEffect;
+    [SerializeField] AudioClip ExplosionSound;
     [SerializeField] float ZoomSpeed = 50f;
     [SerializeField] float rotateSpeed = 50f;
     float minSize = 3;
@@ -49,6 +50,7 @@ public class GameOer : MonoBehaviour
         {
             sister.OnDestroy();
             FireEffect.SetActive(true);
+            AudioSource.PlayClipAtPoint(ExplosionSound, Camera.transform.position);
             if (player != null)
                 player.OnDestroy();
         }
