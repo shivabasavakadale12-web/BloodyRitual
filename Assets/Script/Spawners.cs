@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Spawners : MonoBehaviour
 {
+    [SerializeField] LevelData levelData;
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject[] enemies;
-    [SerializeField] float startInterval = 5.5f;
-    [SerializeField] float minInterval = 3f;
-    [SerializeField] float shrinkPerSecond = 0.075f; 
-    [SerializeField] int maxAlive = 4;
+    [SerializeField] float startInterval;
+    [SerializeField] float minInterval;
+    [SerializeField] float shrinkPerSecond;
+    [SerializeField] int maxAlive;
 
     readonly List<GameObject> spawned = new List<GameObject>();
     float interval;
@@ -16,6 +17,11 @@ public class Spawners : MonoBehaviour
 
     void Start()
     {
+        startInterval = levelData.StartInterval;
+        minInterval = levelData.MinInterval;
+        shrinkPerSecond = levelData.ShrinkPerSecond;
+        maxAlive = levelData.MaxAlive;
+
         if (spawnPoints.Length == 0 || enemies.Length == 0)
         {
             enabled = false;

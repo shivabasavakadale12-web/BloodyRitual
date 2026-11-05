@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4965966360245949781}
   - component: {fileID: 3657087391116007225}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HitBox
   m_TagString: EnemyHitBox
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 507597895958175984}
   - component: {fileID: 5933984930172362125}
   - component: {fileID: 3281084164738380425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}

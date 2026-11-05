@@ -2,19 +2,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float speed = 5f;
+    [SerializeField]  LevelData levelData;
+    float speed;
     PlayerLane playerLane;
     Vector2 Movement;
     Rigidbody2D rb;
     Animator animator;
     bool Facingleft;
 
-
     void Start()
     {
         playerLane = GetComponent<PlayerLane>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        speed = levelData.playerspeed;
     }
 
     public void OnActionMovement(InputAction.CallbackContext context)

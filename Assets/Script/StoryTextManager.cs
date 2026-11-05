@@ -16,10 +16,10 @@ public class StoryTextManager : MonoBehaviour
 
         "Her curse holds a trap whoever tries to end it falls into it" +
         ". So we do not try. Every fourteen years," +
-        " my sister performs the ritual that holds her back, and it begins again.",
+        " my sister Mei Ling performs the ritual that holds her back, and it begins again.",
 
         "Tonight the dead return. Nothing may cross the circle. Not them. Not me." +
-        " Protect my sister, and hold the line for as long as you can."
+        " Protect Mei Ling, and hold the line for as long as you can."
     };
 
 

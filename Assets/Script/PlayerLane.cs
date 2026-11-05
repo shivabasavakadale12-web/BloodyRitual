@@ -3,15 +3,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerLane : MonoBehaviour
 {
+    [SerializeField] LevelData levelData;
     [SerializeField] float bottomY = -1.72f;
     [SerializeField] float topY = 0.18f;
-    [SerializeField] float topDuration = 2.8f;
-    [SerializeField] float cooldown = 0.5f;
+    float topDuration;
+    float cooldown;
     Rigidbody2D rb;
     bool onTop;
     float topTimer;
     float cooldownTimer;
-
     public bool OnTop => onTop;
 
     void Awake()
@@ -19,6 +19,12 @@ public class PlayerLane : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+     void Start()
+     {
+        topDuration = levelData.playerTopDuration;
+        cooldown = levelData.LaneSwitchCooldown;
+     }
+   
     void Update()
     {
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;

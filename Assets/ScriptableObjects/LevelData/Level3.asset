@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db6cf11b230dad47af43bf97a0a30bd, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelNumber: 1
+  StartInterval: 5.5
+  MinInterval: 3
+  MaxAlive: 4
+  ShrinkPerSecond: 0.075
+  RitualCircleSize: 0
+  playerspeed: 5
+  playerTopDuration: 2.8
+  RitualTime: 90
+  LaneSwitchCooldown: 0.5
