@@ -20,5 +20,5 @@ MonoBehaviour:
   RitualCircleSize: 0
   playerspeed: 5
   playerTopDuration: 2.8
-  RitualTime: 90
+  RitualTime: 100
   LaneSwitchCooldown: 0.5

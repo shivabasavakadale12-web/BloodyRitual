@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9db6cf11b230dad47af43bf97a0a30bd, type: 3}
-  m_Name: Level2 1
+  m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelNumber: 1
-  StartInterval: 5.5
-  MinInterval: 3
-  MaxAlive: 4
-  ShrinkPerSecond: 0.075
+  startInterval: 5.5
+  minInterval: 3
+  maxAlive: 4
+  ShrinkperSecond: 0.075
   RitualCircleSize: 0
-  playerspeed: 5
+  playerspeed: 10
   playerTopDuration: 2.8
-  RitualTime: 90
+  RitualTime: 10
   LaneSwitchCooldown: 0.5

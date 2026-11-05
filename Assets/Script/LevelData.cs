@@ -4,10 +4,15 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     public int levelNumber;
-    public float StartInterval;
-    public float MinInterval;
-    public int MaxAlive;
-    public float ShrinkPerSecond;
+    [SerializeField] float startInterval;
+    public float StartInterval => startInterval;
+    [SerializeField] float minInterval;
+    public float MinInterval => minInterval;
+    [SerializeField] int maxAlive;
+    public int MaxAlive => maxAlive;
+    [SerializeField] float ShrinkperSecond;
+    public float ShrinkPerSecond => ShrinkperSecond;
+
     public float RitualCircleSize;
     public float playerspeed;
     public float playerTopDuration;
