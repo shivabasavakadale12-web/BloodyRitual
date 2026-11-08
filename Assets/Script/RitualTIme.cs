@@ -4,15 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class RitualTIme : MonoBehaviour
 {
-    [SerializeField] LevelData LevelData;
+    LevelManager levelManager;
     [SerializeField] GameObject WinMenu;
     [SerializeField] TMP_Text timer; 
 
     float currentRitualTime;
+
+    void Awake()
+    {
+        levelManager = LevelManager.Instance;
+    }
     void Start()
     {
         WinMenu.SetActive(false);
-        currentRitualTime = LevelData.RitualTime;
+        currentRitualTime = levelManager.CurrentLevel.RitualTime;
     }
 
     void Update()

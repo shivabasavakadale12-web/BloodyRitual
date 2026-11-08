@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]  LevelData levelData;
+    LevelManager levelmanager;
     float speed;
     PlayerLane playerLane;
     Vector2 Movement;
@@ -10,13 +10,17 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     bool Facingleft;
 
+    void Awake()
+    {
+        levelmanager = LevelManager.Instance;
+    }
     void Start()
     {
         playerLane = GetComponent<PlayerLane>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        speed = levelData.playerspeed;
+        speed = levelmanager.CurrentLevel.playerspeed;
     }
 
     public void OnActionMovement(InputAction.CallbackContext context)

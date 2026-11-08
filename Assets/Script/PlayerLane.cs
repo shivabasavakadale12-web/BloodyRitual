@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerLane : MonoBehaviour
 {
-    [SerializeField] LevelData levelData;
+    LevelManager levelManager;
     [SerializeField] float bottomY = -1.72f;
     [SerializeField] float topY = 0.18f;
     float topDuration;
@@ -14,15 +14,17 @@ public class PlayerLane : MonoBehaviour
     float cooldownTimer;
     public bool OnTop => onTop;
 
+    
     void Awake()
     {
+        levelManager = LevelManager.Instance;
         rb = GetComponent<Rigidbody2D>();
     }
 
      void Start()
      {
-        topDuration = levelData.playerTopDuration;
-        cooldown = levelData.LaneSwitchCooldown;
+        topDuration = levelManager.CurrentLevel.playerTopDuration;
+        cooldown = levelManager.CurrentLevel.LaneSwitchCooldown;
      }
    
     void Update()
