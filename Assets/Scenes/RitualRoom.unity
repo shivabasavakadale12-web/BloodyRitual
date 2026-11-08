@@ -163,8 +163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3290ecdeeab97d4587c3745023321b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentLevel
-  levelData: {fileID: 11400000, guid: f3c9e88bee019d44d873a2d36c086a98, type: 2}
-  LevelNumber: {fileID: 1960258789}
+  Levels:
+  - {fileID: 11400000, guid: f3c9e88bee019d44d873a2d36c086a98, type: 2}
+  - {fileID: 11400000, guid: 137a2f3b878120d449b721c799225ffb, type: 2}
+  - {fileID: 11400000, guid: 4601aeccdf2c32845a9cd5206faae403, type: 2}
+  currentLevelIndex: 0
 --- !u!114 &64718652 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 618482287609909712, guid: b6789162dcaaf164d9440e782de4eadc, type: 3}
@@ -307,7 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fff9edfb54069e4483d7b31b1736b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawners
-  levelData: []
   spawnPoints:
   - {fileID: 1390944631}
   - {fileID: 75712748}
@@ -6149,8 +6151,8 @@ Transform:
   m_GameObject: {fileID: 2003514708}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8583, y: -1.865, z: 0}
-  m_LocalScale: {x: 4.7019506, y: 1.5673169, z: 1.7672354}
+  m_LocalPosition: {x: 0.807, y: -1.756, z: 0}
+  m_LocalScale: {x: 4.212913, y: 1.4043044, z: 1.5834299}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1531253181}
@@ -6228,7 +6230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392f0236b56cd9744928b94b191c7fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  LevelData: {fileID: 11400000, guid: f3c9e88bee019d44d873a2d36c086a98, type: 2}
   WinMenu: {fileID: 1648150368}
   timer: {fileID: 1961597262}
 --- !u!1 &2006098138

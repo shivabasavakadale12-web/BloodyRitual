@@ -17,12 +17,12 @@ public class PlayerLane : MonoBehaviour
     
     void Awake()
     {
-        levelManager = LevelManager.Instance;
         rb = GetComponent<Rigidbody2D>();
     }
 
      void Start()
      {
+        levelManager = LevelManager.Instance;
         topDuration = levelManager.CurrentLevel.playerTopDuration;
         cooldown = levelManager.CurrentLevel.LaneSwitchCooldown;
      }

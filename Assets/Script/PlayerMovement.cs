@@ -10,12 +10,9 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     bool Facingleft;
 
-    void Awake()
-    {
-        levelmanager = LevelManager.Instance;
-    }
     void Start()
     {
+        levelmanager = LevelManager.Instance;
         playerLane = GetComponent<PlayerLane>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
