@@ -334,6 +334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeadState
   audioSource: {fileID: 2229706489830818688}
+  EnemyDeadEffect: {fileID: 5642766282230003982, guid: b5c8ca7ed10b61e499cce8ec3b6e2e4c, type: 3}
+  isWiped: 0
 --- !u!1 &5778631162720671908
 GameObject:
   m_ObjectHideFlags: 0

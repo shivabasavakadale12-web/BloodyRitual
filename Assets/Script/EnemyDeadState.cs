@@ -5,6 +5,7 @@ public class EnemyDeadState : MonoBehaviour
     EnemyAi enemyAi;
     Animator animator;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] GameObject EnemyDeadEffect;
     public bool isWiped = false;
     bool isDead = false;
     private void Start()
@@ -34,7 +35,13 @@ public class EnemyDeadState : MonoBehaviour
         isDead = true;
         audioSource.Play();
         enemyAi.enabled = false;
-        if(!isWiped)
+        if (isWiped)
+        {
+            Instantiate(EnemyDeadEffect, transform.position, Quaternion.identity);
+            Debug.Log(Instantiate(EnemyDeadEffect, transform.position, Quaternion.identity) + " is the effect");
+        }
+
+        else
         {
          Time.timeScale = 0.5f;
         }

@@ -10,11 +10,15 @@ public class LevelManager : MonoBehaviour
     public LevelData CurrentLevel => Levels[currentLevelIndex];
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
     public void LevelSelection(int levelIndex)
     {
         if(levelIndex < 0 || levelIndex >= Levels.Length)

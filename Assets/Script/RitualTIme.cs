@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class RitualTIme : MonoBehaviour
 {
@@ -9,20 +10,26 @@ public class RitualTIme : MonoBehaviour
     [SerializeField] GameObject player;
     LevelManager levelManager;
     [SerializeField] GameObject WinMenu;
-    [SerializeField]  Camera Camera;
+    [SerializeField]  Camera Mcamera;
     [SerializeField] TMP_Text timer; 
-    [SerializeField] TMP_Text LevelNumber; 
-    [SerializeField]  float ZoomSpeed = 5f;
+    [SerializeField] TMP_Text LevelNumber;
+    [SerializeField] GameObject RitualParticle;
+    [SerializeField] float ZoomSpeed = 5f;
+    [SerializeField] GameObject ParticleEffect;
+    [SerializeField] GameObject spotlight;
+    GameOer GameOver;
     float currentRitualTime;
-    float minSize = 5f;
     float maxSize = 6.4f;
-    bool levelended = false;
-
+    bool RitualEndedFlag = false;
+    public bool Ritualended => RitualEndedFlag;
     public static event Action RitualEnded;
     void Start()
     {
+        GameOver = GetComponent<GameOer>();
+        RitualParticle.SetActive(false);
         Time.timeScale = 1f;
         levelManager = LevelManager.Instance;
+        Mcamera.orthographicSize = 5.72f;
         WinMenu.SetActive(false);
         LevelNumber.text = levelManager.CurrentLevel.levelNumber.ToString("00");
         currentRitualTime = levelManager.CurrentLevel.RitualTime;
@@ -30,11 +37,15 @@ public class RitualTIme : MonoBehaviour
 
     void Update()
     {
-        if (levelended)
+        if (GameOver.Gameover) return;
+        if (RitualEndedFlag)
         {
-         Camera.orthographicSize += ZoomSpeed * Time.unscaledDeltaTime;
-         Camera.orthographicSize = Mathf.Clamp(Camera.orthographicSize, maxSize, minSize);
-         return;
+            Mcamera.orthographicSize += ZoomSpeed * Time.unscaledDeltaTime;
+            Mcamera.orthographicSize = Mathf.SmoothDamp(Mcamera.orthographicSize, maxSize, ref ZoomSpeed, 0.5f);
+            ParticleEffect.transform.localScale = Vector3.Lerp(ParticleEffect.transform.localScale, new Vector3(0, 0, 0), Time.unscaledDeltaTime * 15f);
+            spotlight.transform.localScale = Vector3.Lerp(spotlight.transform.localScale, new Vector3(0, 0, 0), Time.unscaledDeltaTime * 15f);
+            Debug.Log(Mcamera.orthographicSize + " is the size ");
+            return;
         }
         currentRitualTime -= Time.deltaTime;
 
@@ -51,13 +62,18 @@ public class RitualTIme : MonoBehaviour
                 player.GetComponent<PlayerLane>().enabled = false;
                 player.GetComponent<PlayerMovement>().enabled = false;
             }
-
-
-            levelended = true;
+            RitualEndedFlag = true;
             RitualEnded?.Invoke();
             currentRitualTime = 0f;
-            WinMenu.SetActive(true);
+            StartCoroutine(RitualOverRoutine());
         }
+    }
+    IEnumerator RitualOverRoutine()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        RitualParticle.SetActive(true);
+        yield return new WaitForSecondsRealtime(1f);
+        WinMenu.SetActive(true);
     }
 
     public void NextButton()

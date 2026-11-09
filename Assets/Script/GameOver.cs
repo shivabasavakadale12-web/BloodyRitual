@@ -11,21 +11,24 @@ public class GameOer : MonoBehaviour
     [SerializeField] DestroyObjects sister;
     [SerializeField] DestroyObjects player;
     [SerializeField] GrayscaleEffect effect;
-    [SerializeField]
-    GameObject FireEffect;
+    [SerializeField] GameObject FireEffect;
     [SerializeField] AudioClip ExplosionSound;
     [SerializeField] float ZoomSpeed = 50f;
     [SerializeField] float rotateSpeed = 50f;
+    RitualTIme RitualTime;
     float minSize = 3;
     float maxSize = 7;
     bool gameover = false;
+    public bool Gameover => gameover;
 
     private void Start()
     {
+        RitualTime = GetComponent<RitualTIme>();
         LostMenu.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(RitualTime.Ritualended) return;
         gameover = true;
         Debug.Log("game over");
         Time.timeScale = 0.35f;
