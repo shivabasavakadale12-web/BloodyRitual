@@ -6232,6 +6232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   WinMenu: {fileID: 1648150368}
   timer: {fileID: 1961597262}
+  LevelNumber: {fileID: 1960258789}
 --- !u!1 &2006098138
 GameObject:
   m_ObjectHideFlags: 0

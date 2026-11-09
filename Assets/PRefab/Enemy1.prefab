@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 507597895958175984}
   - component: {fileID: 5933984930172362125}
   - component: {fileID: 3281084164738380425}
+  - component: {fileID: 2553976430347444038}
   m_Layer: 7
   m_Name: Enemy1
   m_TagString: Enemy
@@ -275,7 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5600fc02368543841aa98238438c81a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  audioSource: {fileID: 3281084164738380425}
 --- !u!114 &507597895958175984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,3 +399,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2553976430347444038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342452162497845107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff070d3e18a24645a66c8cfb15c4190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeadState
+  audioSource: {fileID: 3281084164738380425}

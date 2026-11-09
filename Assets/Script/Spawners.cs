@@ -36,6 +36,10 @@ public class Spawners : MonoBehaviour
         timer = 0f; 
     }
 
+    public void StopSpawning()
+    {
+        enabled = false;
+    }
     void Update()
     {
         if (GameState.Over) return;

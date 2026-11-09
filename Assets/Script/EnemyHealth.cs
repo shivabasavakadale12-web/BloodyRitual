@@ -2,23 +2,21 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    EnemyAi enemyAi;
-    Animator animator;
-   [SerializeField] AudioSource audioSource;
+    EnemyDeadState enemyDead;
+
+    bool ishurt = false;
     private void Start()
     {
-        enemyAi = GetComponent<EnemyAi>();
-        animator = GetComponent<Animator>();
+       enemyDead = GetComponent<EnemyDeadState>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (ishurt) return;
+        ishurt = true;
         if (collision.gameObject.CompareTag("PlayerHitBox"))
         {
-            audioSource.Play();
-            enemyAi.enabled = false;
-            Time.timeScale = 0.5f;
-            animator.SetTrigger("Die");
+            enemyDead.EnemyDead(ishurt);
         }
     }
 
