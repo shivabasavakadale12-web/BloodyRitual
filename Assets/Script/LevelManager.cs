@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -18,6 +19,10 @@ public class LevelManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        int level = PlayerPrefs.GetInt("LevelUnlocked", 0);
+        Debug.Log("Unlocked: " + level);
+        int maxlevel  =  math.clamp(level, 0, Levels.Length - 1);
+        LevelSelection(maxlevel);
     }
     public void LevelSelection(int levelIndex)
     {

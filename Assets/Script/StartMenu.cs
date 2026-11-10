@@ -8,8 +8,14 @@ public class StartMenu : MonoBehaviour
     [SerializeField] TMP_Text starttext;
     [SerializeField] AudioSource onclickAudio;
     bool stopsflash = false;
+    void Start()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("StartMenu initialized");
+    }
     public void StartButton()
     {
+        Debug.Log("Start button clicked");
         StartCoroutine(ButtonclickRoutin());
     }
 

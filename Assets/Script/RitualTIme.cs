@@ -23,8 +23,10 @@ public class RitualTIme : MonoBehaviour
     bool RitualEndedFlag = false;
     public bool Ritualended => RitualEndedFlag;
     public static event Action RitualEnded;
+    const string UnlockedKey = "LevelUnlocked";
     void Start()
     {
+        Debug.Log("Unlocked: " + PlayerPrefs.GetInt("LevelUnlocked", -1));
         GameOver = GetComponent<GameOer>();
         RitualParticle.SetActive(false);
         Time.timeScale = 1f;
@@ -65,7 +67,20 @@ public class RitualTIme : MonoBehaviour
             RitualEndedFlag = true;
             RitualEnded?.Invoke();
             currentRitualTime = 0f;
+            SaveProgress();
             StartCoroutine(RitualOverRoutine());
+        }
+    }
+
+    void SaveProgress()
+    {
+        int newUnlocked = levelManager.currentLevelIndex + 1;
+        int storedUnlocked = PlayerPrefs.GetInt(UnlockedKey, 0);
+
+        if (newUnlocked > storedUnlocked)
+        {
+            PlayerPrefs.SetInt(UnlockedKey, newUnlocked);
+            PlayerPrefs.Save();
         }
     }
     IEnumerator RitualOverRoutine()

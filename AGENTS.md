@@ -2,7 +2,7 @@
 - Project name: BloodyRitual
 - Unity version: Unity 6000.3.10f1
 - Active game object:
-  - Name: Mei Ling
-  - Tag: Sister
-  - Layer: Default
+  - Name: Canvas
+  - Tag: Untagged
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
