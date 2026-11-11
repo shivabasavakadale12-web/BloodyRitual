@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     public int currentLevelIndex;
     bool LevelExists = false;
+    public int GetCurrentYear => Levels[currentLevelIndex].Year;
     public bool levelExists => LevelExists;
     public LevelData CurrentLevel => Levels[currentLevelIndex];
     void Awake()

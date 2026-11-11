@@ -4,6 +4,7 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     public int levelNumber;
+    public int Year;
     [SerializeField] float startInterval;
     public float StartInterval => startInterval;
     [SerializeField] float minInterval;

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StoryScene.unity
     guid: 0bd87a71b48728743b8d512c279dee14
   - enabled: 1
+    path: Assets/Scenes/LoadScreen.unity
+    guid: b30def7e9030f73489adecfd8909f0f9
+  - enabled: 1
     path: Assets/Scenes/RitualRoom.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects:

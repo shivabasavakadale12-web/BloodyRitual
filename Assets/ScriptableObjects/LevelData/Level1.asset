@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelNumber: 1
+  Year: 14
   startInterval: 5.5
   minInterval: 3
   maxAlive: 4
