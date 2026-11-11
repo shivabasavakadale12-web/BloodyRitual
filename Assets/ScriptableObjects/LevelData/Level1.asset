@@ -18,8 +18,10 @@ MonoBehaviour:
   minInterval: 3
   maxAlive: 4
   ShrinkperSecond: 0.075
+  playerAttackCooldown: 0.6
   RitualCircleSize: 0
-  playerspeed: 10
+  playerspeed: 16
+  MinPlayerSpeed: 12
   playerTopDuration: 2.8
-  RitualTime: 10
-  LaneSwitchCooldown: 0.5
+  RitualTime: 30
+  LaneSwitchCooldown: 0.2

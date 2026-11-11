@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be257d2ba7ae4a04a8fb9c18eb20c7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 10
 --- !u!114 &4058269340727357126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,8 +339,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLane
   bottomY: -1.72
   topY: 0.18
-  topDuration: 2.9
-  cooldown: 0.5
 --- !u!114 &6579803906559845112
 MonoBehaviour:
   m_ObjectHideFlags: 0

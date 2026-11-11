@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyData1
   m_EditorClassIdentifier: Assembly-CSharp::Enemydata
   speed: 2.9
-  attackRange: 2.4
+  attackRange: 2
   attackFrequency: 1.5

@@ -14,8 +14,10 @@ public class LevelData : ScriptableObject
     [SerializeField] float ShrinkperSecond;
     public float ShrinkPerSecond => ShrinkperSecond;
 
+    public float playerAttackCooldown;
     public float RitualCircleSize;
     public float playerspeed;
+    public float MinPlayerSpeed;
     public float playerTopDuration;
     public float RitualTime;
     public float LaneSwitchCooldown;

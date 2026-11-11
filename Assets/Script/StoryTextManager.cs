@@ -8,6 +8,7 @@ public class StoryTextManager : MonoBehaviour
     [SerializeField] GameObject StartButton;
     [SerializeField] AudioSource onclick1Audio;
     [SerializeField] AudioSource onclick2Audio;
+    bool Audio = false;
     string[] storyText = new string[]
     {
         "Long ago, our family killed a fourteen year old girl to protect its honor." +
@@ -32,7 +33,9 @@ public class StoryTextManager : MonoBehaviour
     public void Nextbutton()
     {
         if (storyTextUI.text == storyText[0])
-        {    storyTextUI.text = storyText[1];
+
+        { 
+            storyTextUI.text = storyText[1];
             onclick1Audio.Play();
         }
         else if (storyTextUI.text == storyText[1])
@@ -40,7 +43,11 @@ public class StoryTextManager : MonoBehaviour
             storyTextUI.text = storyText[2];
             StartButton.SetActive(true);
             nextButton.SetActive(false);
-            onclick2Audio.Play();
+            if (!Audio)
+            {
+                onclick2Audio.Play();
+                Audio = true;
+            }
         }
     }
 

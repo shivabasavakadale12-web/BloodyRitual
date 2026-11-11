@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class Combat : MonoBehaviour
 {
+    PlayerHealth health;
+    LevelManager levelManager;
     EnemyAi enemyAttack;
     bool Attacking = false;
     public bool isAttacking => Attacking;
@@ -11,9 +13,12 @@ public class Combat : MonoBehaviour
     [SerializeField] AudioSource swordSwing;
     [SerializeField] GameObject effect;
     bool isEffectActive = false;
+    float cooldown = 0f;
 
     void Start()
     {
+        health = GetComponent<PlayerHealth>();
+        levelManager = LevelManager.Instance;
         Debug.Log("Combat script started");
         enemyAttack = FindAnyObjectByType<EnemyAi>();
         animator = GetComponent<Animator>();
@@ -23,9 +28,8 @@ public class Combat : MonoBehaviour
 
     public void OnActionAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && !Attacking )
-        {
-          
+        if (context.performed && !Attacking && !health.Hurt)
+        {       
             Attack();
         }
     }
@@ -51,6 +55,21 @@ public class Combat : MonoBehaviour
          AudioSource.PlayClipAtPoint(swordSwing.clip, cameraPos);
     }
 
+     void Update()
+    {
+        if(!Attacking) { return; }
+
+        if(Attacking)
+        {
+            cooldown += Time.deltaTime;
+
+          if(cooldown >= levelManager.CurrentLevel.playerAttackCooldown)
+          {
+            cooldown = 0;
+            Attacking = false;
+          }
+        }
+    }
     void EnableHitBox()
     {
         HitBox.enabled = true;

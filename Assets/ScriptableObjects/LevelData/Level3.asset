@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelNumber: 3
-  Year: 32
+  Year: 42
   startInterval: 4.8
   minInterval: 2.25
   maxAlive: 4
   ShrinkperSecond: 0.075
+  playerAttackCooldown: 0.7
   RitualCircleSize: 0
-  playerspeed: 10
+  playerspeed: 12
+  MinPlayerSpeed: 9
   playerTopDuration: 2.8
-  RitualTime: 5
+  RitualTime: 40
   LaneSwitchCooldown: 0.5

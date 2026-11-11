@@ -38,12 +38,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        speed += 0.0005f;
+        speed -= 0.0005f;
 
-        if(speed >= 16f)
+        if(speed <= levelmanager.CurrentLevel.MinPlayerSpeed)
         {
-            speed = 16f;
-        }    
+            speed = levelmanager.CurrentLevel.MinPlayerSpeed;
+        }     
         float zAngle = playerLane.OnTop ? 180f : 0f;
         float yAngle = (Facingleft != playerLane.OnTop) ? 180f : 0f;
         transform.rotation = Quaternion.Euler(0f, yAngle, zAngle);

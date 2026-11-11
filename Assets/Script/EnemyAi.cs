@@ -4,6 +4,7 @@ public class EnemyAi : MonoBehaviour
 {
     [SerializeField] Enemydata Enemydata;
     [SerializeField] BoxCollider2D hitBox;
+    EnemyHealth health;
     Combat playerAttack;
     GameObject Sister;
     Transform player;
@@ -17,6 +18,7 @@ public class EnemyAi : MonoBehaviour
 
     void Start()
     {
+        health = GetComponent<EnemyHealth>();
         Sister = GameObject.FindWithTag("Sister");
         p = GameObject.FindWithTag("Player");
         playerAttack = FindAnyObjectByType<Combat>();
@@ -73,7 +75,7 @@ public class EnemyAi : MonoBehaviour
 
     void StartAttack()
     {
-        if (playerAttack.isAttacking) return;
+        if (playerAttack.isAttacking || health.isHurt) { Stop(); return; }
         isAttacking = true;
         coolDown = 0f;
         Animator.SetTrigger("Attack");

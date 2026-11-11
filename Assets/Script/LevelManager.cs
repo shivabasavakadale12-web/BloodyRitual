@@ -1,10 +1,12 @@
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] LevelData[] Levels;
     public static LevelManager Instance;
+    KillCounter killCounter;
     public int currentLevelIndex;
     bool LevelExists = false;
     public int GetCurrentYear => Levels[currentLevelIndex].Year;
@@ -24,6 +26,26 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Unlocked: " + level);
         int maxlevel  =  math.clamp(level, 0, Levels.Length - 1);
         LevelSelection(maxlevel);
+    }
+
+    private void Start()
+    {
+        killCounter = FindAnyObjectByType<KillCounter>();
+    }
+
+    void Update()
+    {
+        if(currentLevelIndex == Levels.Length - 1)
+        {
+            Debug.Log("Final level");
+            //check player performs from level 3 and 4 to decide they win or lose this round
+        }
+
+        if(Keyboard.current.bKey.isPressed)
+        {
+            PlayerPrefs.DeleteAll();
+            Debug.Log("LevelProgress have been deleted");
+        }
     }
     public void LevelSelection(int levelIndex)
     {

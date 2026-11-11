@@ -97,10 +97,16 @@ public class RitualTIme : MonoBehaviour
 
         if (!levelManager.levelExists) return;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("RitualRoom");
-        Debug.Log("Bruh Implement the logic dumbass idiot");
+        SceneManager.LoadScene("LoadScreen");
+        StartCoroutine(RitualRoomRoutine());
     }
 
+    IEnumerator RitualRoomRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("RitualRoom");
+
+    }
     public void HomePage()
     {
         Time.timeScale = 1f;

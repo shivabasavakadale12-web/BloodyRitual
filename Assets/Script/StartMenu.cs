@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] TMP_Text starttext;
     [SerializeField] AudioSource onclickAudio;
     bool stopsflash = false;
+    bool Audio = false;
     void Start()
     {
         Time.timeScale = 1f;
@@ -21,7 +23,11 @@ public class StartMenu : MonoBehaviour
 
     IEnumerator ButtonclickRoutin()
     {
-        onclickAudio.Play();
+        if(!Audio)
+        {
+         onclickAudio.Play();
+            Audio = true;
+        }
         yield return new WaitForSeconds(2f);
         stopsflash = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
