@@ -88,4 +88,12 @@ public class EnemyAi : MonoBehaviour
         isAttacking = false;
         hitBox.enabled = false;
     }
+
+    public void Stopall()
+    {
+        Debug.Log("stoping enemy attack");
+        hitBox.enabled = false;
+        Rb.linearVelocity = Vector2.zero;
+        Animator.ResetTrigger("Attack");
+    }
 }

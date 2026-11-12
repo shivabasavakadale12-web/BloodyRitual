@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class Settings : MonoBehaviour
     {
         SettingsMenu.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void HomeButton()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void AudioSettings()

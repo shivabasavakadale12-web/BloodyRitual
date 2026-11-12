@@ -15,10 +15,11 @@ public class EnemyHealth : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (ishurt) return;
-        ishurt = true;
-        enemyai.enabled = false;
         if (collision.gameObject.CompareTag("PlayerHitBox"))
         {
+            ishurt = true;
+            enemyai.Stopall();
+            enemyai.enabled = false;
             enemyDead.EnemyDead(ishurt);
             Invoke("die", 0.7f);
         }
