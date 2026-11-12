@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class RitualTIme : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class RitualTIme : MonoBehaviour
     [SerializeField]  Camera Mcamera;
     [SerializeField] TMP_Text timer; 
     [SerializeField] TMP_Text LevelNumber;
+    [SerializeField] Image EndBg;
     [SerializeField] GameObject RitualParticle;
     [SerializeField] float ZoomSpeed = 5f;
     [SerializeField] GameObject ParticleEffect;
@@ -42,6 +44,7 @@ public class RitualTIme : MonoBehaviour
         if (GameOver.Gameover) return;
         if (RitualEndedFlag)
         {
+            if (Mcamera.orthographicSize >= 6.4f) return;
             Mcamera.orthographicSize += ZoomSpeed * Time.unscaledDeltaTime;
             Mcamera.orthographicSize = Mathf.SmoothDamp(Mcamera.orthographicSize, maxSize, ref ZoomSpeed, 0.5f);
             ParticleEffect.transform.localScale = Vector3.Lerp(ParticleEffect.transform.localScale, new Vector3(0, 0, 0), Time.unscaledDeltaTime * 15f);
@@ -85,14 +88,44 @@ public class RitualTIme : MonoBehaviour
     }
     IEnumerator RitualOverRoutine()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
-        RitualParticle.SetActive(true);
-        yield return new WaitForSecondsRealtime(1f);
-        WinMenu.SetActive(true);
+        Debug.Log("CLI: " + levelManager.currentLevelIndex + " LLI: " + levelManager.levels.Length);
+        if (levelManager.currentLevelIndex != levelManager.levels.Length - 1)
+        {
+            yield return new WaitForSecondsRealtime(0.5f);
+            RitualParticle.SetActive(true);
+            yield return new WaitForSecondsRealtime(1f);
+            WinMenu.SetActive(true);
+        }
+
+        else
+        {
+            Debug.Log("Seq started");
+            StartCoroutine(EndSequenceRoutine());
+           //end sequence
+        }
     }
 
+
+    IEnumerator EndSequenceRoutine()
+    {
+        Debug.Log("Seq running"); 
+        Color c = EndBg.color;
+        c.a = 0f;
+        EndBg.color = c;
+        EndBg.enabled = true;
+        yield return new WaitForSeconds(3f);
+        float alpha = 0f;
+        while (alpha < 1)
+        {
+            alpha = Mathf.MoveTowards(alpha, 1f, Time.unscaledDeltaTime);
+            c.a = alpha;
+            EndBg.color = c;
+            yield return null;
+        }
+    }
     public void NextButton()
     {
+      
         levelManager.LevelSelection(levelManager.currentLevelIndex + 1);
 
         if (!levelManager.levelExists) return;

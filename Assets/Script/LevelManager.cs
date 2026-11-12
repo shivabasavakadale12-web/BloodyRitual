@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] LevelData[] Levels;
+    public LevelData[] levels => Levels;
     public static LevelManager Instance;
     KillCounter killCounter;
     public int currentLevelIndex;
@@ -12,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public int GetCurrentYear => Levels[currentLevelIndex].Year;
     public bool levelExists => LevelExists;
     public LevelData CurrentLevel => Levels[currentLevelIndex];
+    int attempts = 0;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -35,18 +37,24 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if(currentLevelIndex == Levels.Length - 1)
+        if (currentLevelIndex != Levels.Length - 1) return;
+
+        if (attempts > 22)
         {
-            Debug.Log("Final level");
-            //check player performs from level 3 and 4 to decide they win or lose this round
+            //lose logic here
         }
 
-        if(Keyboard.current.bKey.isPressed)
+        else if(attempts <= 22)
         {
-            PlayerPrefs.DeleteAll();
-            Debug.Log("LevelProgress have been deleted");
+            //Win logic here
         }
     }
+
+    public void PlayerChance(int Count)
+    {
+        attempts += Count;
+    }
+
     public void LevelSelection(int levelIndex)
     {
         if(levelIndex < 0 || levelIndex >= Levels.Length)

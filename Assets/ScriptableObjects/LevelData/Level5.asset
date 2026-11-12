@@ -23,5 +23,5 @@ MonoBehaviour:
   playerspeed: 10
   MinPlayerSpeed: 8
   playerTopDuration: 2
-  RitualTime: 60
+  RitualTime: 15
   LaneSwitchCooldown: 0.8
