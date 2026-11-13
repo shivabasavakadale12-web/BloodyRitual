@@ -20,8 +20,8 @@ MonoBehaviour:
   ShrinkperSecond: 0.1
   playerAttackCooldown: 1
   RitualCircleSize: 0
-  playerspeed: 10
-  MinPlayerSpeed: 8
+  playerspeed: 9
+  MinPlayerSpeed: 7
   playerTopDuration: 2
-  RitualTime: 15
+  RitualTime: 60
   LaneSwitchCooldown: 0.8

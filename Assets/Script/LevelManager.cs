@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,12 +9,14 @@ public class LevelManager : MonoBehaviour
     public LevelData[] levels => Levels;
     public static LevelManager Instance;
     KillCounter killCounter;
+    GameOer gameover;
     public int currentLevelIndex;
     bool LevelExists = false;
     public int GetCurrentYear => Levels[currentLevelIndex].Year;
     public bool levelExists => LevelExists;
     public LevelData CurrentLevel => Levels[currentLevelIndex];
-    int attempts = 0;
+    int Attempts = 0;
+    public int attempts => Attempts;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -33,26 +36,19 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         killCounter = FindAnyObjectByType<KillCounter>();
+        gameover = GameOer.Instance;
     }
 
     void Update()
     {
         if (currentLevelIndex != Levels.Length - 1) return;
-
-        if (attempts > 22)
-        {
-            //lose logic here
-        }
-
-        else if(attempts <= 22)
-        {
-            //Win logic here
-        }
+        gameover.EndSeq();
     }
 
     public void PlayerChance(int Count)
     {
-        attempts += Count;
+        Attempts += Count;
+        Debug.Log(attempts + " attemped");
     }
 
     public void LevelSelection(int levelIndex)

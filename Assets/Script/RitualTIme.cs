@@ -9,7 +9,9 @@ public class RitualTIme : MonoBehaviour
 {
     [SerializeField] Spawners enemySpawner;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject yeartext;
     LevelManager levelManager;
+    Combat playercombat;
     [SerializeField] GameObject WinMenu;
     [SerializeField]  Camera Mcamera;
     [SerializeField] TMP_Text timer; 
@@ -19,6 +21,10 @@ public class RitualTIme : MonoBehaviour
     [SerializeField] float ZoomSpeed = 5f;
     [SerializeField] GameObject ParticleEffect;
     [SerializeField] GameObject spotlight;
+    [SerializeField] float FadeDuration;
+    [SerializeField] GameObject EndSeqText;
+    [SerializeField] GameObject Buttons;
+    [SerializeField] GameObject Author;
     GameOer GameOver;
     float currentRitualTime;
     float maxSize = 6.4f;
@@ -28,6 +34,8 @@ public class RitualTIme : MonoBehaviour
     const string UnlockedKey = "LevelUnlocked";
     void Start()
     {
+        playercombat = FindAnyObjectByType<Combat>();
+        playercombat.enabled = true;
         Debug.Log("Unlocked: " + PlayerPrefs.GetInt("LevelUnlocked", -1));
         GameOver = GetComponent<GameOer>();
         RitualParticle.SetActive(false);
@@ -49,7 +57,6 @@ public class RitualTIme : MonoBehaviour
             Mcamera.orthographicSize = Mathf.SmoothDamp(Mcamera.orthographicSize, maxSize, ref ZoomSpeed, 0.5f);
             ParticleEffect.transform.localScale = Vector3.Lerp(ParticleEffect.transform.localScale, new Vector3(0, 0, 0), Time.unscaledDeltaTime * 15f);
             spotlight.transform.localScale = Vector3.Lerp(spotlight.transform.localScale, new Vector3(0, 0, 0), Time.unscaledDeltaTime * 15f);
-            Debug.Log(Mcamera.orthographicSize + " is the size ");
             return;
         }
         currentRitualTime -= Time.deltaTime;
@@ -88,6 +95,9 @@ public class RitualTIme : MonoBehaviour
     }
     IEnumerator RitualOverRoutine()
     {
+        if(playercombat != null)   playercombat.enabled = false;
+        
+        
         Debug.Log("CLI: " + levelManager.currentLevelIndex + " LLI: " + levelManager.levels.Length);
         if (levelManager.currentLevelIndex != levelManager.levels.Length - 1)
         {
@@ -99,29 +109,39 @@ public class RitualTIme : MonoBehaviour
 
         else
         {
-            Debug.Log("Seq started");
             StartCoroutine(EndSequenceRoutine());
-           //end sequence
         }
     }
 
 
     IEnumerator EndSequenceRoutine()
     {
-        Debug.Log("Seq running"); 
+
         Color c = EndBg.color;
         c.a = 0f;
         EndBg.color = c;
-        EndBg.enabled = true;
-        yield return new WaitForSeconds(3f);
+        EndBg.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(3f);
         float alpha = 0f;
         while (alpha < 1)
         {
-            alpha = Mathf.MoveTowards(alpha, 1f, Time.unscaledDeltaTime);
+            alpha = Mathf.MoveTowards(alpha, 1f, Time.unscaledDeltaTime / FadeDuration);
             c.a = alpha;
             EndBg.color = c;
             yield return null;
         }
+        yield return new WaitForSecondsRealtime(2f);
+        yeartext.SetActive(true);
+        yield return new WaitForSecondsRealtime(3f);
+        Destroy(yeartext);
+        yield return new WaitForSecondsRealtime(2f);
+        EndSeqText.SetActive(true);
+        Debug.Log( "is endseq true: " + EndSeqText);
+        yield return new WaitForSecondsRealtime(5f);
+        Author.SetActive(true);
+        yield return new WaitForSecondsRealtime(2f);
+        Buttons.SetActive(true);
+
     }
     public void NextButton()
     {
