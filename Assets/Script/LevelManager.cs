@@ -2,6 +2,7 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class LevelManager : MonoBehaviour
     public LevelData[] levels => Levels;
     public static LevelManager Instance;
     KillCounter killCounter;
-    GameOer gameover;
     public int currentLevelIndex;
     bool LevelExists = false;
     public int GetCurrentYear => Levels[currentLevelIndex].Year;
@@ -28,7 +28,6 @@ public class LevelManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         int level = PlayerPrefs.GetInt("LevelUnlocked", 0);
-        Debug.Log("Unlocked: " + level);
         int maxlevel  =  math.clamp(level, 0, Levels.Length - 1);
         LevelSelection(maxlevel);
     }
@@ -36,19 +35,25 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         killCounter = FindAnyObjectByType<KillCounter>();
-        gameover = GameOer.Instance;
     }
 
-    void Update()
+    public void Reset()
     {
-        if (currentLevelIndex != Levels.Length - 1) return;
-        gameover.EndSeq();
-    }
 
+        Time.timeScale = 1f;
+
+        Attempts = 0;
+        LevelSelection(0);
+        Debug.Log("Lund fuckaer hai");
+        SceneManager.LoadScene("LoadScreen");
+    }
+    public void TestButton()
+    {
+        Debug.Log("RESTART BUTTON RECEIVED CLICK");
+    }
     public void PlayerChance(int Count)
     {
         Attempts += Count;
-        Debug.Log(attempts + " attemped");
     }
 
     public void LevelSelection(int levelIndex)
@@ -56,11 +61,11 @@ public class LevelManager : MonoBehaviour
         if(levelIndex < 0 || levelIndex >= Levels.Length)
         {
             LevelExists = false;
-            Debug.LogError("Invalid level index: " + levelIndex);
             return;
         }
         LevelExists = true;
         currentLevelIndex = levelIndex;
+
     }
 
 }

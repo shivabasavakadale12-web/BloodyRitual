@@ -91,7 +91,6 @@ public class EnemyAi : MonoBehaviour
 
     public void Stopall()
     {
-        Debug.Log("stoping enemy attack");
         hitBox.enabled = false;
         Rb.linearVelocity = Vector2.zero;
         Animator.ResetTrigger("Attack");

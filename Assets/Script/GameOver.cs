@@ -45,7 +45,6 @@ public class GameOer : MonoBehaviour
         if(RitualTime.Ritualended) return;
             levelmanager.PlayerChance(1);
         gameover = true;
-        Debug.Log("game over");
         Time.timeScale = 0.35f;
         StartCoroutine(LoadSceneRoutine(collision));
     }
@@ -66,6 +65,7 @@ public class GameOer : MonoBehaviour
         if (gameEnd) return;
         if (levelmanager.attempts > 22)
         {
+
             endText.text = "Fourteen years had passed again, and this time Lian did not send her ghosts. She came herself.\r\n\r\nShe only wanted to be seen. The others wanted more. They took her power from her, and it made them hungry in a way she had never been.\r\n\r\nYou held the door as long as you could. It was not long enough. The ritual went quiet before the last candle did.\r\n\r\nThe family burned for the first time. Lian stood in the doorway and watched, and she did not smile.\r\n\r\nShe was fourteen once. That was all she ever was.\r\n\r\nThe End".ToString();
             gameEnd = true;
         }
@@ -98,7 +98,24 @@ public class GameOer : MonoBehaviour
         gameover = false;
     }
 
-    public void Restart()
+    public void RestartGame()
+    {
+        Debug.Log("Restart button clicked!");
+
+        Time.timeScale = 1f;
+
+        if (LevelManager.Instance == null)
+        {
+            Debug.LogError("LevelManager missing!");
+            return;
+        }
+
+        LevelManager.Instance.Reset();
+
+        SceneManager.LoadScene("LoadScreen");
+
+    }
+    public void Retry()
     {
         gameover = false;
         Time.timeScale = 1f;

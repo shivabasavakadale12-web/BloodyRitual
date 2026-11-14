@@ -19,7 +19,6 @@ public class Combat : MonoBehaviour
     {
         health = GetComponent<PlayerHealth>();
         levelManager = LevelManager.Instance;
-        Debug.Log("Combat script started");
         enemyAttack = FindAnyObjectByType<EnemyAi>();
         animator = GetComponent<Animator>();
         HitBox = GetComponentInChildren<BoxCollider2D>();

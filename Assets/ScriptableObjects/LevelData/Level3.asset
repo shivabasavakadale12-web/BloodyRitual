@@ -15,7 +15,7 @@ MonoBehaviour:
   levelNumber: 3
   Year: 42
   startInterval: 4.8
-  minInterval: 2.25
+  minInterval: 1.93
   maxAlive: 4
   ShrinkperSecond: 0.075
   playerAttackCooldown: 0.7

@@ -532,14 +532,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3095830074767939353, guid: 308879359ed535e4fb849e050568bd38, type: 3}
-      propertyPath: Levels.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3095830074767939353, guid: 308879359ed535e4fb849e050568bd38, type: 3}
-      propertyPath: 'Levels.Array.data[3]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 4601aeccdf2c32845a9cd5206faae403, type: 2}
     - target: {fileID: 3115781875118973763, guid: 308879359ed535e4fb849e050568bd38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 967.84796

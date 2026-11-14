@@ -15,13 +15,13 @@ MonoBehaviour:
   levelNumber: 5
   Year: 70
   startInterval: 3.5
-  minInterval: 2.13
-  maxAlive: 5
+  minInterval: 1.86
+  maxAlive: 6
   ShrinkperSecond: 0.1
   playerAttackCooldown: 1
   RitualCircleSize: 0
-  playerspeed: 9
-  MinPlayerSpeed: 7
+  playerspeed: 8
+  MinPlayerSpeed: 6
   playerTopDuration: 2
   RitualTime: 60
   LaneSwitchCooldown: 0.8

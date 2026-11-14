@@ -25,9 +25,11 @@ public class RitualTIme : MonoBehaviour
     [SerializeField] GameObject EndSeqText;
     [SerializeField] GameObject Buttons;
     [SerializeField] GameObject Author;
+    [SerializeField] GameObject restart;
     GameOer GameOver;
     float currentRitualTime;
     float maxSize = 6.4f;
+    float alpha;
     bool RitualEndedFlag = false;
     public bool Ritualended => RitualEndedFlag;
     public static event Action RitualEnded;
@@ -45,6 +47,11 @@ public class RitualTIme : MonoBehaviour
         WinMenu.SetActive(false);
         LevelNumber.text = levelManager.CurrentLevel.levelNumber.ToString("00");
         currentRitualTime = levelManager.CurrentLevel.RitualTime;
+        yeartext.SetActive(false);
+        EndSeqText.SetActive(false);
+        Author.SetActive(false);
+        EndBg.gameObject.SetActive(false);
+        alpha = 0f;
     }
 
     void Update()
@@ -95,10 +102,12 @@ public class RitualTIme : MonoBehaviour
     }
     IEnumerator RitualOverRoutine()
     {
-        if(playercombat != null)   playercombat.enabled = false;
-        
-        
-        Debug.Log("CLI: " + levelManager.currentLevelIndex + " LLI: " + levelManager.levels.Length);
+        if (player != null)
+        {
+            player.GetComponent<Combat>().enabled = false;
+            player.GetComponent<PlayerLane>().enabled = false;
+            player.GetComponent<PlayerMovement>().enabled = false;
+        }
         if (levelManager.currentLevelIndex != levelManager.levels.Length - 1)
         {
             yield return new WaitForSecondsRealtime(0.5f);
@@ -122,7 +131,7 @@ public class RitualTIme : MonoBehaviour
         EndBg.color = c;
         EndBg.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3f);
-        float alpha = 0f;
+        alpha = 0f;
         while (alpha < 1)
         {
             alpha = Mathf.MoveTowards(alpha, 1f, Time.unscaledDeltaTime / FadeDuration);
@@ -135,25 +144,27 @@ public class RitualTIme : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         Destroy(yeartext);
         yield return new WaitForSecondsRealtime(2f);
+        GameOver.EndSeq();
         EndSeqText.SetActive(true);
-        Debug.Log( "is endseq true: " + EndSeqText);
         yield return new WaitForSecondsRealtime(5f);
         Author.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
         Buttons.SetActive(true);
+        restart.SetActive(true);
 
     }
     public void NextButton()
     {
-      
-        levelManager.LevelSelection(levelManager.currentLevelIndex + 1);
+        int nextLevel = levelManager.currentLevelIndex + 1;
 
-        if (!levelManager.levelExists) return;
+        levelManager.LevelSelection(nextLevel);
+
+        if (!levelManager.levelExists)
+            return;
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("LoadScreen");
-        StartCoroutine(RitualRoomRoutine());
     }
-
     IEnumerator RitualRoomRoutine()
     {
         yield return new WaitForSeconds(2f);

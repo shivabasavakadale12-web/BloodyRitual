@@ -15,13 +15,10 @@ public class Spawners : MonoBehaviour
     float interval;
     float timer;
 
-    void Awake()
-    {
-        levelManager = LevelManager.Instance;
-    }
     void Start()
     {
 
+        levelManager = LevelManager.Instance;
         startInterval = levelManager.CurrentLevel.StartInterval;
         minInterval = levelManager.CurrentLevel.MinInterval;
         shrinkPerSecond = levelManager.CurrentLevel.ShrinkPerSecond;

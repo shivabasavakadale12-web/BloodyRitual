@@ -11,7 +11,7 @@ public class StoryTextManager : MonoBehaviour
     bool Audio = false;
     string[] storyText = new string[]
     {
-        "Long ago, our family killed a fourteen year old girl to protect its honor." +
+        "Long ago, our family killed a fourteen year old girl Lian to protect its honor." +
         " As she died, she cursed us. She swore she would return every " +
         "fourteen years, reborn, to hunt us. She keeps her word.",
 
